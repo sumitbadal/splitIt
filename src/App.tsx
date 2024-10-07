@@ -130,12 +130,7 @@
 // }
 
 // export default App;
-
-import { Input, XFileReader } from "manish-quick-ui";
-import React from "react";
-
-import { Panel } from "manish-quick-ui";
-import Register from "./Spiit/user/register/Register";
+import React, { useEffect, useState } from "react";
 import User from "./Spiit/user/User/User";
 
 const App = () => {

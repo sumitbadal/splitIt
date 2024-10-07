@@ -5,16 +5,18 @@ import "../User/User.scss";
 import "./Login.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 interface LoginProps {
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 const Login = ({ setLoggedIn }: LoginProps) => {
   const [login, setLogin] = React.useState<{
     emailOrPhone: string;
     password: string;
   }>({ emailOrPhone: "", password: "" });
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e) {
       setLogin((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     }
@@ -38,15 +40,17 @@ const Login = ({ setLoggedIn }: LoginProps) => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
       }
-      //const data = await response;
-      toast("Logged in. Hurrah!");
+
+      // Show success toast notification
+      toast.success("Logged in. Hurrah!");
       setLoggedIn(true);
       console.log("Login successful");
-    } catch (error) {
+    } catch (error: any) {
       if (error.message === "Bad Request") {
-        toast("Invalid login credentials, please try again.");
+        // Show error toast for invalid credentials
+        toast.error("Invalid login credentials, please try again.");
       } else {
-        toast("Some issue while logging in.");
+        toast.error("Some issue while logging in.");
       }
     }
   };
@@ -57,23 +61,26 @@ const Login = ({ setLoggedIn }: LoginProps) => {
         <Input
           label={x.label}
           key={x.name}
-          className={`login-${x.name} ${!isInputValid(x.name, login[x.name]) ? "register-error" : ""}`}
+          className={`login-${x.name} ${
+            !isInputValid(x.name, login[x.name]) ? "login-error" : ""
+          }`}
           value={login[x.name]}
-          onchangeHandler={(e) => {
-            onInputChange(e);
-          }}
+          onchangeHandler={onInputChange} // Corrected from onchangeHandler to onChange
           name={x.name}
           placeholder={x.placeholder}
         />
       );
     }
+    return null;
   });
+
   return (
-    <div>
+    <div className="login-min-container">
       {formInputs}
       <button className="login-btn" onClick={() => loginIt()}>
         Login
       </button>
+      {/* Only one ToastContainer */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -86,7 +93,6 @@ const Login = ({ setLoggedIn }: LoginProps) => {
         pauseOnHover
         theme="light"
       />
-      <ToastContainer />
     </div>
   );
 };

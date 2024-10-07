@@ -8,30 +8,7 @@ $mustard-yellow: #ffdb58;
 $teal-blue: #008080;
 $error-color: #ff4c4c;
 
-.register-panel {
-  border: 2px solid $teal-blue;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f7f7f7;
 
-  h1 {
-    color: $teal-blue;
-  }
-
-  button {
-    background-color: $mustard-yellow;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: darken($mustard-yellow, 10%);
-    }
-  }
-}
 
 input {
   border: 1px solid $teal-blue;
@@ -58,7 +35,7 @@ input {
 }
 
 .sm-msg{
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .login-btn, .register-submit{

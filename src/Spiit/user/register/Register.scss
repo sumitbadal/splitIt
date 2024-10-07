@@ -1,58 +1,88 @@
-.register-error{
-    border: 1px solid red;
-}
-
-// Register.scss
-
-$mustard-yellow: #ffdb58;
-$teal-blue: #008080;
-$error-color: #ff4c4c;
-
-.register-panel {
-  border: 2px solid $teal-blue;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f7f7f7;
-
-  h1 {
-    color: $teal-blue;
+/* General Container */
+.main-register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    width: 100%;
+    max-width: 400px;
   }
-
-  button {
-    background-color: $mustard-yellow;
-    color: white;
+  
+  /* Input Fields */
+  .register-input {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .register-input:focus {
+    border-color: #3f51b5;
+    outline: none;
+  }
+  
+  .register-error {
+    border-color: #ff5252;
+  }
+  
+  /* Submit Button */
+  .register-submit {
+    width: 100%;
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 16px;
     border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: darken($mustard-yellow, 10%);
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+  }
+  
+  .register-submit:hover {
+    background-color: #303f9f;
+  }
+  
+  .register-submit:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Toast Notification */
+  .toastify-container {
+    z-index: 9999;
+  }
+  
+  .register-error {
+    border-color: 'red';
+  }
+  /* Responsive Styles */
+  @media (max-width: 600px) {
+    .main-register-container {
+      padding: 20px;
+      margin: 0 15px;
+    }
+  
+    .register-input {
+      padding: 12px 14px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+  
+    .register-submit {
+      padding: 14px;
+      font-size: 16px;
     }
   }
-}
-
-input {
-  border: 1px solid $teal-blue;
-  border-radius: 1px;
-  padding: 5px;
-  font-size: 1rem;
-  width: 95%;
-  &.register-error {
-    border-color: $error-color;
-  }
-}
-
-.register-phone  {
-  margin-bottom: 5px;
-}
-
-.register-error {
-  border-color: $error-color;
-}
-
-.main-register-container{
-    padding: 10px;
-   
-}
+  
