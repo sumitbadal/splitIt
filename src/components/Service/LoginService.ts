@@ -7,17 +7,22 @@ class LoginService {
     emailId: string;
     password: string;
   }) => {
-    axios
-      .post("http://13.235.83.111/clusterApi/login", {
-        emailId,
-        password,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    try {
+      const response = await axios.post(
+        "http://13.235.83.111/clusterApi/auth/login",
+        {
+          emailId,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      return response; // Return response here
+    } catch (error) {
+      console.error("Error during signup:", error);
+      throw error; // Throw the error to be caught outside
+    }
   };
 }
 

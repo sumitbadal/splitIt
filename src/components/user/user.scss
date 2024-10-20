@@ -1,0 +1,102 @@
+/* Ensure the body and html take full height */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Flex container that takes full viewport height */
+.container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: calc(100vh - 200px);
+}
+
+.current {
+  width: 100%; /* Adjust the width as needed */
+  max-width: 400px; /* You can limit the width to keep the form compact */
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--bg-color); /* Optional background to highlight the form */
+  opacity: 1;
+  margin: 5px;
+  .mb-i:focus {
+    border-color: #1b1212;
+  }
+}
+
+/* Other styles */
+.table-header > tr > th {
+  background-color: rebeccapurple !important;
+  color: aliceblue !important;
+}
+
+.table-header1 > tr > th {
+  background-color: rgb(189, 171, 8) !important;
+}
+
+.item-table-container {
+  margin-top: 20px;
+  border-radius: 10px;
+  /* background: #ffdb58; */
+}
+
+.add-item-btn {
+  width: 100%;
+  padding: 10px 20px;
+  height: 50px;
+  background: var(--btn-color);
+  color: var(--text-color);
+}
+
+.add-item-btn[disabled] {
+  opacity: 70%;
+}
+
+.container-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-item-head button {
+  background-color: transparent;
+  padding: 0;
+}
+
+.container-item-head .left-item {
+  margin-right: auto;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.container-item-head .right-item {
+  display: flex;
+  align-items: center;
+  border: none;
+  color: #1b1212;
+}
+
+.right-item .xfile-container {
+  /* Additional styling if needed */
+}
+.current {
+  width: 100%; /* Adjust the width as needed */
+  max-width: 400px; /* You can limit the width to keep the form compact */
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--bg-color); /* Optional background to highlight the form */
+}
+
+.signup-login-link-holder {
+  text-align: center;
+  text-decoration: none;
+  a {
+    color: #1b1212;
+  }
+}
+.login-error {
+  text-align: center;
+  color: red;
+}
