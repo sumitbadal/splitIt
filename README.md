@@ -48,6 +48,3 @@ Make sure you have the following installed:
    git clone https://github.com/your-username/expense-tracker.git
    cd expense-tracker
    ```
-
-cd backend
-npm install
