@@ -16,7 +16,14 @@ import {
   validateEmail,
   validatePassword,
 } from "../UserUtils";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Email,
+  Password,
+  Phone,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 
 interface RegisterProps {
   [key: string]: string;
@@ -150,7 +157,7 @@ const RegisterForm = () => {
   return (
     <div className="current">
       <div className="container-item-head">
-        <span className="left-item">Register</span>
+        <h2 className="login-heading">Sign Up</h2>
         <button
           className="right-item"
           onClick={(e) => {
@@ -158,7 +165,7 @@ const RegisterForm = () => {
             setRegisterDetails(initData);
           }}
         >
-          <RefreshIcon />
+          {/* <RefreshIcon /> */}
         </button>
       </div>
       <Box component="form" noValidate sx={{ mt: 3 }}>
@@ -179,6 +186,13 @@ const RegisterForm = () => {
               }}
               error={!!errors.name && touched.name}
               helperText={touched.name ? errors.name : ""}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -194,6 +208,13 @@ const RegisterForm = () => {
               onChange={(e) => {
                 handleItems(e);
                 handleBlur(e);
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Email />
+                  </InputAdornment>
+                ),
               }}
               error={!!errors.emailOrPhone && touched.emailOrPhone}
               helperText={touched.emailOrPhone ? errors.emailOrPhone : ""}
@@ -212,6 +233,13 @@ const RegisterForm = () => {
               onChange={(e) => {
                 handleItems(e);
                 handleBlur(e);
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Phone />
+                  </InputAdornment>
+                ),
               }}
               error={!!errors.phone && touched.phone}
               helperText={touched.phone ? errors.phone : ""}
@@ -234,6 +262,11 @@ const RegisterForm = () => {
               error={!!errors.password && touched.password}
               helperText={touched.password ? errors.password : ""}
               InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Password />
+                  </InputAdornment>
+                ),
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
