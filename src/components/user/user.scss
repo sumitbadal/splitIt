@@ -55,20 +55,13 @@ body {
 }
 
 .container-item-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.container-item-head button {
-  background-color: transparent;
-  padding: 0;
-}
-
-.container-item-head .left-item {
+  margin-bottom: 50px;
   margin-right: auto;
   font-weight: 700;
-  font-size: 20px;
+  text-align: center;
+}
+
+.login-heading {
 }
 
 .container-item-head .right-item {
@@ -86,7 +79,7 @@ body {
   max-width: 400px; /* You can limit the width to keep the form compact */
   padding: 20px;
   border-radius: 10px;
-  background: var(--bg-color); /* Optional background to highlight the form */
+  /* Optional background to highlight the form */
 }
 
 .signup-login-link-holder {

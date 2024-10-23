@@ -10,7 +10,13 @@ import { useEffect, useMemo, useState } from "react";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { loginService } from "../../Service/LoginService";
 import { useDataStateContext } from "../../context/DataStateContext";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Visibility,
+  VisibilityOff,
+  Email,
+  Password,
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import {
   isAllFieldsValid,
@@ -133,8 +139,8 @@ const LoginForm = (props: LoggedInProps) => {
   return (
     <div className="current">
       <div className="container-item-head">
-        <span className="left-item">Login</span>
-        <button
+        <h2 className="login-heading">Login</h2>
+        {/* <button
           className="right-item"
           onClick={(e) => {
             e.preventDefault();
@@ -142,7 +148,7 @@ const LoginForm = (props: LoggedInProps) => {
           }}
         >
           <RefreshIcon />
-        </button>
+        </button> */}
       </div>
       <Box component="form" noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
@@ -159,6 +165,13 @@ const LoginForm = (props: LoggedInProps) => {
               onChange={(e) => {
                 handleItems(e);
                 handleBlur(e);
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Email />
+                  </InputAdornment>
+                ),
               }}
               error={!!errors.emailOrPhone && touched.emailOrPhone}
               helperText={touched.emailOrPhone ? errors.emailOrPhone : ""}
@@ -183,6 +196,11 @@ const LoginForm = (props: LoggedInProps) => {
               error={!!errors.password && touched.password}
               helperText={touched.password ? errors.password : ""}
               InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Password />
+                  </InputAdornment>
+                ),
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
@@ -216,7 +234,8 @@ const LoginForm = (props: LoggedInProps) => {
             </Grid>
           )}
           <Grid item xs={12} sm={12} className="signup-login-link-holder">
-            <Link onClick={switchToSignup}>Signup</Link>
+            Don't have an account?{" "}
+            <Link onClick={switchToSignup}> Sign Up</Link>
           </Grid>
         </Grid>
       </Box>

@@ -16,7 +16,14 @@ import {
   validateEmail,
   validatePassword,
 } from "../UserUtils";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Email,
+  Password,
+  Phone,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 
 interface RegisterProps {
   [key: string]: string;
@@ -94,14 +101,13 @@ const RegisterForm = () => {
 
     if (!registerDetails.phone && touched.phone) {
       newErrors.phone = messages.phoneRequired;
-    } else if (
-      touched.phone &&
-      registerDetails.phone.length !== 10 &&
-      !isNaN(parseInt(registerDetails.phone))
-    ) {
-      newErrors.phone = messages.phoneInvalid;
+    } else if (touched.phone) {
+      const phone = registerDetails.phone.trim();
+      // Check if it's numeric and exactly 10 digits long
+      if (phone.length !== 10 || isNaN(Number(phone))) {
+        newErrors.phone = messages.phoneInvalid;
+      }
     }
-
     if (!registerDetails.password && touched.password) {
       newErrors.password = messages.passwordRequired;
     } else if (touched.password && validatePassword(registerDetails.password)) {
@@ -151,8 +157,8 @@ const RegisterForm = () => {
   return (
     <div className="current">
       <div className="container-item-head">
-        <span className="left-item">Register</span>
-        <button
+        <h2 className="login-heading">Sign Up</h2>
+        {/* <button
           className="right-item"
           onClick={(e) => {
             e.preventDefault();
@@ -160,7 +166,7 @@ const RegisterForm = () => {
           }}
         >
           <RefreshIcon />
-        </button>
+        </button> */}
       </div>
       <Box component="form" noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
@@ -180,6 +186,13 @@ const RegisterForm = () => {
               }}
               error={!!errors.name && touched.name}
               helperText={touched.name ? errors.name : ""}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -195,6 +208,13 @@ const RegisterForm = () => {
               onChange={(e) => {
                 handleItems(e);
                 handleBlur(e);
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Email />
+                  </InputAdornment>
+                ),
               }}
               error={!!errors.emailOrPhone && touched.emailOrPhone}
               helperText={touched.emailOrPhone ? errors.emailOrPhone : ""}
@@ -213,6 +233,13 @@ const RegisterForm = () => {
               onChange={(e) => {
                 handleItems(e);
                 handleBlur(e);
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Phone />
+                  </InputAdornment>
+                ),
               }}
               error={!!errors.phone && touched.phone}
               helperText={touched.phone ? errors.phone : ""}
@@ -235,6 +262,11 @@ const RegisterForm = () => {
               error={!!errors.password && touched.password}
               helperText={touched.password ? errors.password : ""}
               InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Password />
+                  </InputAdornment>
+                ),
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
@@ -267,7 +299,7 @@ const RegisterForm = () => {
             </Grid>
           )}
           <Grid item xs={12} sm={12} className="signup-login-link-holder">
-            <Link onClick={switchToLogin}>Login</Link>
+            Have an account?<Link onClick={switchToLogin}> Login</Link>
           </Grid>
         </Grid>
       </Box>
