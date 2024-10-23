@@ -13,6 +13,7 @@ export enum messages {
   nameMinLength = "Min 3 characters required",
   phoneRequired = "Phone number is required",
   phoneInvalid = "Invalid phone number",
+  groupNameInvalud = "Please provide group name",
 }
 
 export const isAllFieldsValid = (obj: Record<string, string>): boolean => {

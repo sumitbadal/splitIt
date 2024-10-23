@@ -2,6 +2,7 @@ import { Switch } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { ThemeContext } from "manish-quick-ui";
+import CreateGroup from "../Groups/CreateGroup";
 const Body = () => {
   const label = { inputProps: { "aria-label": "Switch Theme" } };
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -13,6 +14,7 @@ const Body = () => {
 
   return (
     <div>
+      <CreateGroup />
       <Switch {...label} defaultChecked onClick={changeTheme} />
       <Outlet />
     </div>

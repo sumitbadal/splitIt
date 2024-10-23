@@ -7,23 +7,16 @@ import {
   TextField,
 } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
-import RefreshIcon from "@mui/icons-material/Refresh";
 import { loginService } from "../../Service/LoginService";
 import { useDataStateContext } from "../../context/DataStateContext";
 import {
-  AccountCircle,
   Visibility,
   VisibilityOff,
   Email,
   Password,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import {
-  isAllFieldsValid,
-  messages,
-  validateEmail,
-  validatePassword,
-} from "../UserUtils";
+import { isAllFieldsValid, messages, validateEmail } from "../UserUtils";
 
 interface LoginProps {
   [key: string]: string;

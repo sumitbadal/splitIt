@@ -9,7 +9,7 @@ class LoginService {
   }) => {
     try {
       const response = await axios.post(
-        "http://13.235.83.111/clusterApi/auth/login",
+        "http://13.200.237.131/clusterApi/auth/login",
         {
           emailId,
           password,
