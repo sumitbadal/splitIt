@@ -158,15 +158,15 @@ const RegisterForm = () => {
     <div className="current">
       <div className="container-item-head">
         <h2 className="login-heading">Sign Up</h2>
-        <button
+        {/* <button
           className="right-item"
           onClick={(e) => {
             e.preventDefault();
             setRegisterDetails(initData);
           }}
         >
-          {/* <RefreshIcon /> */}
-        </button>
+          <RefreshIcon />
+        </button> */}
       </div>
       <Box component="form" noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
@@ -299,7 +299,7 @@ const RegisterForm = () => {
             </Grid>
           )}
           <Grid item xs={12} sm={12} className="signup-login-link-holder">
-            <Link onClick={switchToLogin}>Login</Link>
+            Have an account?<Link onClick={switchToLogin}> Login</Link>
           </Grid>
         </Grid>
       </Box>

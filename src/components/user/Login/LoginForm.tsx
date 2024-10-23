@@ -140,15 +140,15 @@ const LoginForm = (props: LoggedInProps) => {
     <div className="current">
       <div className="container-item-head">
         <h2 className="login-heading">Login</h2>
-        <button
+        {/* <button
           className="right-item"
           onClick={(e) => {
             e.preventDefault();
             setLoginDetails(initData);
           }}
         >
-          {/* <RefreshIcon /> */}
-        </button>
+          <RefreshIcon />
+        </button> */}
       </div>
       <Box component="form" noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
