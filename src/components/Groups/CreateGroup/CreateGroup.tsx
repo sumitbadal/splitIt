@@ -41,7 +41,7 @@ const CreateGroup = () => {
     const newErrors = { name: "" };
 
     if (!groupdetails.name && touched.name) {
-      newErrors.name = messages.groupNameInvalud;
+      newErrors.name = messages.groupNameInvalid;
     }
 
     setErrors(newErrors);
