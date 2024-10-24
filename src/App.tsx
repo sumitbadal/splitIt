@@ -1,12 +1,9 @@
-import React from "react";
 import "./App.css";
 import {
-  BrowserRouter,
-  Routes,
-  Route,
   Navigate,
   createBrowserRouter,
   RouterProvider,
+  useNavigate,
 } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Login from "./components/user/Login/Login";
@@ -54,13 +51,6 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  const { state } = useDataStateContext();
-
-  // Private route component
-  const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-    return state.loginDetails.email ? children : <Navigate to="/login" />;
-  };
-
   return (
     // <BrowserRouter>
     //   <Routes>
