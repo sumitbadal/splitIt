@@ -1,24 +1,22 @@
-/* Ensure the body and html take full height */
 html,
 body {
   height: 100%;
   margin: 0;
 }
 
-/* Flex container that takes full viewport height */
 .container {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
   height: calc(100vh - 200px);
 }
 
 .current {
-  width: 100%; /* Adjust the width as needed */
-  max-width: 400px; /* You can limit the width to keep the form compact */
+  width: 100%;
+  max-width: 400px;
   padding: 20px;
   border-radius: 10px;
-  background: var(--bg-color); /* Optional background to highlight the form */
+  background: var(--bg-color);
   opacity: 1;
   margin: 5px;
   .mb-i:focus {
@@ -26,7 +24,6 @@ body {
   }
 }
 
-/* Other styles */
 .table-header > tr > th {
   background-color: rebeccapurple !important;
   color: aliceblue !important;
@@ -39,7 +36,6 @@ body {
 .item-table-container {
   margin-top: 20px;
   border-radius: 10px;
-  /* background: #ffdb58; */
 }
 
 .add-item-btn {
@@ -51,7 +47,7 @@ body {
 }
 
 .add-item-btn[disabled] {
-  opacity: 70%;
+  opacity: 80%;
 }
 
 .container-item-head {
