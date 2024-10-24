@@ -2,15 +2,22 @@ import React, { useEffect } from "react";
 import "./Home.scss";
 import { useDataStateContext } from "../context/DataStateContext";
 import { Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { state, dispatch } = useDataStateContext();
+  const navigate = useNavigate();
   const {
     loginDetails: { name, email },
   } = state;
-  const [groups, setGroups] = React.useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!name) {
+      navigate("/login");
+    }
+  }, []);
+
+  const [groups, setGroups] = React.useState([]);
 
   return (
     <div>

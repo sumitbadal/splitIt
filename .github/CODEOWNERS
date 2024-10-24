@@ -1,0 +1,7 @@
+# This is a comment
+# Specify code owners for specific files and directories
+
+# Define the owners for the entire repo
+*       @mansih774 @sumitbadal
+
+

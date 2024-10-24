@@ -2,10 +2,10 @@ import {
   Box,
   Grid,
   TextField,
-  Link,
   InputAdornment,
   IconButton,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { registerService } from "../../Service/RegisterService";
@@ -24,6 +24,9 @@ import {
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
+import SmallToast from "../../ui-utils/Toast";
+import { loginService } from "../../Service/LoginService";
+import { useDataStateContext } from "../../context/DataStateContext";
 
 interface RegisterProps {
   [key: string]: string;
@@ -36,6 +39,21 @@ interface RegisterProps {
 const RegisterForm = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [showError, setShowError] = useState("");
+  const [open, setOpen] = useState<boolean>(false);
+  const {
+    dispatch,
+    state: {
+      loginDetails: { name, email },
+    },
+  } = useDataStateContext();
+
+  useEffect(() => {
+    console.log(email);
+    if (name && email) {
+      navigate("/home");
+    }
+  }, [email]);
+
   const [errors, setErrors] = useState({
     emailOrPhone: "",
     password: "",
@@ -76,6 +94,7 @@ const RegisterForm = () => {
       [field]: true,
     }));
   };
+
   const allFieldsValid = useMemo(
     () => isAllFieldsValid(registerDetails),
     [registerDetails]
@@ -136,6 +155,19 @@ const RegisterForm = () => {
         phone,
         fullName: name,
       })
+      .then((resp) => {
+        setOpen(true);
+        return loginService.login({
+          emailId: registerDetails.emailOrPhone,
+          password: registerDetails.password,
+        });
+      })
+      .then((resp) => {
+        dispatch({
+          type: "loginDetails",
+          payload: { name, email: emailOrPhone, phone: phone },
+        });
+      })
       .catch((e) => {
         if (e.response && e.response.data && e.response.data.message) {
           console.log(e.response.data.message);
@@ -154,19 +186,20 @@ const RegisterForm = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleCloseToast = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
   return (
     <div className="current">
       <div className="container-item-head">
         <h2 className="login-heading">Sign Up</h2>
-        {/* <button
-          className="right-item"
-          onClick={(e) => {
-            e.preventDefault();
-            setRegisterDetails(initData);
-          }}
-        >
-          <RefreshIcon />
-        </button> */}
       </div>
       <Box component="form" noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
@@ -299,10 +332,16 @@ const RegisterForm = () => {
             </Grid>
           )}
           <Grid item xs={12} sm={12} className="signup-login-link-holder">
-            Have an account?<Link onClick={switchToLogin}> Login</Link>
+            Have an account?<Link to={"/login"}> Login</Link>
           </Grid>
         </Grid>
       </Box>
+      <SmallToast
+        open={open}
+        message="Account created successfully. We're logging you in."
+        onClose={handleCloseToast}
+        autoHideDuration={3000}
+      />
     </div>
   );
 };

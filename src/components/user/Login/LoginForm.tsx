@@ -3,27 +3,21 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Link,
   TextField,
 } from "@mui/material";
+
+import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import RefreshIcon from "@mui/icons-material/Refresh";
 import { loginService } from "../../Service/LoginService";
 import { useDataStateContext } from "../../context/DataStateContext";
 import {
-  AccountCircle,
   Visibility,
   VisibilityOff,
   Email,
   Password,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import {
-  isAllFieldsValid,
-  messages,
-  validateEmail,
-  validatePassword,
-} from "../UserUtils";
+import { isAllFieldsValid, messages, validateEmail } from "../UserUtils";
 
 interface LoginProps {
   [key: string]: string;
@@ -37,6 +31,7 @@ interface LoggedInProps {
 
 const LoginForm = (props: LoggedInProps) => {
   const [isFormValid, setIsFormValid] = useState(false);
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({ emailOrPhone: "", password: "" });
   const [showError, setShowError] = useState("");
   const [touched, setTouched] = useState({
@@ -48,10 +43,20 @@ const LoginForm = (props: LoggedInProps) => {
     password: "",
   };
   const [loginDetails, setLoginDetails] = useState<LoginProps>(initData);
-  const { dispatch } = useDataStateContext();
+  const {
+    dispatch,
+    state: {
+      loginDetails: { name, email },
+    },
+  } = useDataStateContext();
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log(email);
+    if (name && email) {
+      navigate("/home");
+    }
+  }, [email]);
   const handleItems = (e: any) => {
     const inputType = e?.target.name;
     setLoginDetails((prev) => ({
@@ -98,10 +103,6 @@ const LoginForm = (props: LoggedInProps) => {
       !newErrors.emailOrPhone && !newErrors.password && allFieldsValid
     );
   }, [loginDetails, touched]);
-
-  const switchToSignup = () => {
-    navigate("/register");
-  };
 
   const letsLogin = async () => {
     if (!allFieldsValid) return;
@@ -234,8 +235,7 @@ const LoginForm = (props: LoggedInProps) => {
             </Grid>
           )}
           <Grid item xs={12} sm={12} className="signup-login-link-holder">
-            Don't have an account?{" "}
-            <Link onClick={switchToSignup}> Sign Up</Link>
+            Don't have an account? <Link to={"/register"}> Sign Up</Link>
           </Grid>
         </Grid>
       </Box>
