@@ -21,7 +21,7 @@ class GroupServices {
   createGroup = async ({ name, description = "", icon = "" }: ICreateGroup) => {
     try {
       const response = await axios.post(
-        "http://13.200.237.131/clusterApi/auth/",
+        "http://13.200.237.131/clusterApi/group/create",
         {
           name,
           description,
@@ -31,10 +31,10 @@ class GroupServices {
           withCredentials: true,
         }
       );
-      return response; // Return response here
+      return response;
     } catch (error) {
       console.error("Error during signup:", error);
-      throw error; // Throw the error to be caught outside
+      throw error;
     }
   };
 }

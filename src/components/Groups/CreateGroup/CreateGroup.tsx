@@ -2,8 +2,8 @@ import { Email, Group } from "@mui/icons-material";
 import { Box, Button, Grid, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./CreateGroup.scss";
-import { messages } from "../user/UserUtils";
-import GroupServices from "../Service/GroupServices";
+import { messages } from "../../user/UserUtils";
+import GroupServices from "../../Service/GroupServices";
 export interface ICreateGroup {
   name: string;
 }

@@ -1,7 +1,8 @@
 import { Box, Grid } from "@mui/material";
 import LoginForm from "./LoginForm";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../user.scss";
+import { useDataStateContext } from "../../context/DataStateContext";
 
 const Login = () => {
   const scrollRef = useRef(null);
