@@ -3,6 +3,7 @@ import "./Home.scss";
 import { useDataStateContext } from "../context/DataStateContext";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Loader from "../ui-utils/Loader";
 
 const Home = () => {
   const { state, dispatch } = useDataStateContext();
@@ -20,7 +21,7 @@ const Home = () => {
   const [groups, setGroups] = React.useState([]);
 
   return (
-    <div>
+    <div className="home-container">
       {groups?.length > 0 ? (
         <></>
       ) : (

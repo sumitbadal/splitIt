@@ -14,6 +14,12 @@ import CreateGroup from "./components/Groups/CreateGroup/CreateGroup";
 import Groups from "./components/Groups/Groups";
 import ErrorPage from "./components/ui-utils/ErrorPage";
 import GroupDetails from "./components/Groups/Details/GroupDetails";
+import LoadingBackdrop from "./components/ui-utils/backdrop/LoadingBackdrop";
+import { useLoading } from "./components/context/LoadingContext";
+import Friends from "./components/Friends/Friends";
+import CreateFriend from "./components/Friends/CreateFriend";
+import Account from "./components/Account/Account";
+import FriendDetails from "./components/Friends/FriendDetails";
 
 const router = createBrowserRouter([
   {
@@ -47,34 +53,35 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/friends",
+        element: <Friends />,
+        children: [
+          {
+            path: "/friends/create",
+            element: <CreateFriend />,
+          },
+        ],
+      },
+      {
+        path: "/friend/:friendId",
+        element: <FriendDetails />,
+      },
+      {
+        path: "/Account",
+        element: <Account />,
+      },
     ],
   },
 ]);
 function App() {
+  const { loading } = useLoading();
+
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Body />}>
-    //       {/* Private Routes */}
-    //       <Route
-    //         index
-    //         element={
-    //           <PrivateRoute>
-    //             <Home />
-    //           </PrivateRoute>
-    //         }
-    //       />
-
-    //       {/* Public Routes */}
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/register" element={<Register />} />
-
-    //       {/* Catch-all route for undefined paths */}
-    //       <Route path="*" element={<Navigate to="/" />} />
-    //     </Route>
-    //   </Routes>
-    // </BrowserRouter>
-    <RouterProvider router={router} />
+    <>
+      <LoadingBackdrop open={loading} />
+      <RouterProvider router={router} />
+    </>
   );
 }
 

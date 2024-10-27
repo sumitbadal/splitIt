@@ -6,6 +6,7 @@ html {
 /* Dark Theme */
 [data-theme="dark"] {
   --bg-color: var(--bg-dark);
+  --bg-revcolor: var(--bg-light);
   --text-color: var(--primary-color);
   --heading-color: var(--heading-dark);
   --bg-panel: var(--bg-panel-dark);
@@ -29,6 +30,7 @@ html {
 /* Dark-Light Theme */
 [data-theme="light"] {
   --bg-color: var(--bg-light);
+  --bg-revcolor: var(--bg-dark);
   --text-color: var(--warning-color);
   --heading-color: var(--primary-color); /* Dark Blue/Green for headings */
   --bg-panel: var(--bg-panel-light);
@@ -78,11 +80,13 @@ html {
   --border-light: #fff;
 }
 
-
+.pad5{
+  padding: 5px;
+}
 body {
   height: 100%;
   background-color: var(--bg-color);
-  color: var(--text-color);
+  /* color: var(--text-color); */
   padding: 0;
   margin: 0;
   font-weight: 500;
