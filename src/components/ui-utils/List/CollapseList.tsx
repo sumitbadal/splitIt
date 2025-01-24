@@ -16,14 +16,14 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 
 interface IAttrib {
   name: string;
-  value: string;
+  value: string | React.ReactNode;
   id: string;
   children?: IAttrib[]; // Allow children to be an array of the same type
 }
 
 interface IListx {
   records: IAttrib[];
-  title?: string; // Optional title for when you need to render group titles
+  title?: string | React.ReactNode; // Optional title for when you need to render group titles
 }
 const CollapseList = ({ records, title }: IListx) => {
   const [open, setOpen] = React.useState(false);

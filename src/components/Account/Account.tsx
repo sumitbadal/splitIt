@@ -1,10 +1,11 @@
 import React from "react";
 import Listx from "../ui-utils/List/Listx";
 import { useDataStateContext } from "../context/DataStateContext";
+import Cookies from "js-cookie";
 import { Button } from "@mui/material";
-import { Phone } from "@mui/icons-material";
-
+import { useNavigate } from "react-router-dom";
 const Account = () => {
+  const navigate = useNavigate();
   const {
     dispatch,
     state: {
@@ -19,10 +20,12 @@ const Account = () => {
         variant={"outlined"}
         fullWidth
         onClick={() => {
+          Cookies.remove("token");
           dispatch({
             type: "loginDetails",
             payload: { name: "", email: "", phone: "" },
           });
+          navigate("/login");
         }}
       >
         Logout

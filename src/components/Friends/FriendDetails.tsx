@@ -1,4 +1,4 @@
-import { Box, Card } from "@mui/material";
+import { Box, Card, Skeleton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AvatarGroup from "@mui/joy/AvatarGroup";
 import { useParams } from "react-router-dom";
@@ -9,7 +9,8 @@ interface IFrienddetails {
   id: string;
 }
 const FriendDetails = () => {
-  const { showLoading, hideLoading } = useLoading();
+  const [loading, setLoaidng] = useState<boolean>();
+
   const params = useParams();
   const {
     state: {
@@ -23,14 +24,38 @@ const FriendDetails = () => {
   });
 
   useEffect(() => {
-    showLoading();
-
+    setLoaidng(true);
     setTimeout(() => {
       setDetails({ name: name, owe: true, owePrice: 1000.3 });
-      hideLoading();
+      setLoaidng(false);
     }, 2000);
   }, []);
 
+  const skeletons = [1].map((x) => (
+    <>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ margin: 1 }}>
+          {loading ? (
+            <Skeleton variant="circular">
+              <Avatar />
+            </Skeleton>
+          ) : (
+            <Avatar src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg" />
+          )}
+        </Box>
+        <Box sx={{ width: "80%" }}>
+          <Skeleton width="95%">
+            <Typography>.</Typography>
+          </Skeleton>
+        </Box>
+        <Box sx={{ width: "20%" }}>
+          <Skeleton width="100%">
+            <Typography>.</Typography>
+          </Skeleton>
+        </Box>
+      </Box>
+    </>
+  ));
   return (
     <div style={{ padding: "10px" }}>
       <Card
@@ -42,19 +67,23 @@ const FriendDetails = () => {
           padding: "12px",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Avatar src="/static/images/avatar/1.jpg" size="lg" />
-          {friendDetail.name}
-          <AvatarGroup size="sm" sx={{ "--Avatar-size": "28px" }}>
-            {params.friendId}
-          </AvatarGroup>
-        </Box>
+        {loading ? (
+          skeletons
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Avatar src="/static/images/avatar/1.jpg" size="lg" />
+            {friendDetail.name}
+            <AvatarGroup size="sm" sx={{ "--Avatar-size": "28px" }}>
+              {params.friendId}
+            </AvatarGroup>
+          </Box>
+        )}
       </Card>
     </div>
   );

@@ -19,7 +19,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { isAllFieldsValid, messages, validateEmail } from "../UserUtils";
 import { useLoading } from "../../context/LoadingContext";
-
+import { Login } from "manish-service-layer";
 interface LoginProps {
   [key: string]: string;
   emailOrPhone: string;
@@ -37,6 +37,7 @@ const LoginForm = (props: LoggedInProps) => {
   const [errors, setErrors] = useState({ emailOrPhone: "", password: "" });
   const [showError, setShowError] = useState("");
   const [isLoading, setLoading] = useState<boolean>(false);
+  const log = new Login();
   const [touched, setTouched] = useState({
     emailOrPhone: false,
     password: false,
@@ -55,7 +56,6 @@ const LoginForm = (props: LoggedInProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    console.log(email);
     if (name && email) {
       navigate("/home");
     }
@@ -114,26 +114,29 @@ const LoginForm = (props: LoggedInProps) => {
 
     try {
       setLoading(true);
-      const resp = await loginService.login({
+      const resp = await log.login({
         emailId: loginDetails.emailOrPhone,
         password: loginDetails.password,
       });
 
-      const {
-        data: {
-          details: { fullName, emailId, phone },
-        },
-      } = resp;
+      // const {
+      //   data: {
+      //     details: { fullName, emailId, phone },
+      //   },
+      // } = resp;
 
       dispatch({
         type: "loginDetails",
-        payload: { name: fullName, email: emailId, phone: phone },
+        payload: { name: "fullName", email: "emailId", phone: "phone" },
       });
     } catch (e) {
       if (e?.response?.data?.message) {
         setShowError(e.response.data.message);
       } else {
         console.log("An error occurred:", e.message || e);
+      }
+      if (e.response.status === 401) {
+        navigate("/login");
       }
     } finally {
       hideLoading();

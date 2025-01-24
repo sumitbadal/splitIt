@@ -16,7 +16,7 @@ const Home = () => {
     if (!name) {
       navigate("/login");
     }
-  }, []);
+  }, [name]);
 
   const [groups, setGroups] = React.useState([]);
 

@@ -20,6 +20,8 @@ import Friends from "./components/Friends/Friends";
 import CreateFriend from "./components/Friends/CreateFriend";
 import Account from "./components/Account/Account";
 import FriendDetails from "./components/Friends/FriendDetails";
+import { useEffect } from "react";
+import Tabs from "./components/Common/Tab/Tabs";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/splitIt",
         element: <Login />,
       },
       {
@@ -79,6 +85,19 @@ function App() {
 
   return (
     <>
+      {/* <Tabs defaultActiveTab={2}>
+        <Tabs.TabList>
+          <Tabs.Tab index={0}>Tab 1</Tabs.Tab>
+          <Tabs.Tab index={1}>Tab 2</Tabs.Tab>
+          <Tabs.Tab index={2}>Tab 3</Tabs.Tab>
+        </Tabs.TabList>
+
+        <Tabs.TabPanels>
+          <Tabs.TabPanel index={0}>Content for Tab 1</Tabs.TabPanel>
+          <Tabs.TabPanel index={1}>Content for Tab 2</Tabs.TabPanel>
+          <Tabs.TabPanel index={2}>Content for Tab 3</Tabs.TabPanel>
+        </Tabs.TabPanels>
+      </Tabs> */}
       <LoadingBackdrop open={loading} />
       <RouterProvider router={router} />
     </>

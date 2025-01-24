@@ -50,7 +50,6 @@ const RegisterForm = () => {
   } = useDataStateContext();
 
   useEffect(() => {
-    console.log(email);
     if (name && email) {
       navigate("/home");
     }
@@ -136,7 +135,7 @@ const RegisterForm = () => {
     }
 
     setErrors(newErrors);
-    console.log(newErrors);
+
     setIsFormValid(
       !newErrors.emailOrPhone &&
         !newErrors.password &&

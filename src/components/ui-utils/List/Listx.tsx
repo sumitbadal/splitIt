@@ -11,9 +11,10 @@ import SendIcon from "@mui/icons-material/Send";
 import CollapseList from "./CollapseList";
 import { Circle, ListAlt, TripOrigin } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import "./Listx.scss";
 interface IAttrib {
   name: string;
-  value: string;
+  value: string | React.ReactNode;
   id: string;
   children?: IAttrib[]; // Allow children to be an array of the same type
 }
@@ -38,20 +39,22 @@ const Listx = ({ records, primaryIocn, navPath }: IListx) => {
         }
         disablePadding
         onClick={() => navPath && navigate(`${navPath}/${x.id}`)}
+        className={"list-rows"}
       >
         {x.children ? (
           <CollapseList records={x.children} title={x.value} />
         ) : (
           <ListItemButton>
             <ListItemIcon>{primaryIocn || <ListAlt />}</ListItemIcon>
-            <ListItemText primary={x.value} />
+            <ListItemText primary={x.name} />
+            <ListItemText primary={x.value} className={"x-value"} />
           </ListItemButton>
         )}
       </ListItem>
     ));
   };
   return (
-    <div>
+    <div className="listx-container">
       {records?.length > 0 ? (
         <List
           sx={{
@@ -61,6 +64,7 @@ const Listx = ({ records, primaryIocn, navPath }: IListx) => {
           component="nav"
           aria-labelledby="nested-list-subheader"
           subheader={createList()}
+          className={""}
         />
       ) : (
         <>no groups</>

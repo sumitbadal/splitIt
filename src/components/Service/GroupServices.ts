@@ -22,7 +22,7 @@ class GroupServices {
   createGroup = async ({ name, description = "", icon = "" }: GroupList) => {
     try {
       const response = await axios.post(
-        `${process.env.server}/clusterApi/group/create`,
+        `${process.env.REACT_APP_BASE_URL}group/create`,
         {
           name,
           description,
@@ -45,7 +45,7 @@ class GroupServices {
     }
     try {
       const response = await axios.get(
-        `${process.env.server}/clusterApi/group/get`,
+        `${process.env.REACT_APP_BASE_URL}group/get`,
         {
           withCredentials: true,
         }
@@ -57,7 +57,7 @@ class GroupServices {
   getGroupById = async () => {
     try {
       const response = await axios.get(
-        `${process.env.server}/clusterApi/group/get`,
+        `${process.env.REACT_APP_BASE_URL}group/get`,
         {
           withCredentials: true,
         }
