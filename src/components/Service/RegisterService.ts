@@ -11,7 +11,7 @@ class RegisterService {
   signup = async ({ emailId, password, fullName, phone }: IRegister) => {
     try {
       const response = await axios.post(
-        "http://13.200.237.131/clusterApi/auth/signup",
+        `${process.env.REACT_APP_BASE_URL}auth/signup`,
         {
           emailId,
           password,

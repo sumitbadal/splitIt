@@ -27,6 +27,7 @@ import {
 import SmallToast from "../../ui-utils/Toast";
 import { loginService } from "../../Service/LoginService";
 import { useDataStateContext } from "../../context/DataStateContext";
+import { useLoading } from "../../context/LoadingContext";
 
 interface RegisterProps {
   [key: string]: string;
@@ -37,6 +38,7 @@ interface RegisterProps {
 }
 
 const RegisterForm = () => {
+  const { showLoading, hideLoading } = useLoading();
   const [isFormValid, setIsFormValid] = useState(false);
   const [showError, setShowError] = useState("");
   const [open, setOpen] = useState<boolean>(false);
@@ -48,7 +50,6 @@ const RegisterForm = () => {
   } = useDataStateContext();
 
   useEffect(() => {
-    console.log(email);
     if (name && email) {
       navigate("/home");
     }
@@ -134,7 +135,7 @@ const RegisterForm = () => {
     }
 
     setErrors(newErrors);
-    console.log(newErrors);
+
     setIsFormValid(
       !newErrors.emailOrPhone &&
         !newErrors.password &&
@@ -145,9 +146,9 @@ const RegisterForm = () => {
   }, [registerDetails, touched]);
 
   const signup = () => {
+    showLoading();
     if (!allFieldsValid) return;
     const { emailOrPhone, password, phone, name } = registerDetails;
-
     registerService
       .signup({
         emailId: emailOrPhone,
@@ -175,7 +176,8 @@ const RegisterForm = () => {
         } else {
           console.log("An error occurred:", e.message || e);
         }
-      });
+      })
+      .finally(hideLoading);
   };
 
   const switchToLogin = () => {

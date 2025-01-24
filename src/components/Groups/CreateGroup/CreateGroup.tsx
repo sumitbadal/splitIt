@@ -3,12 +3,11 @@ import { Box, Button, Grid, InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./CreateGroup.scss";
 import { messages } from "../../user/UserUtils";
-import GroupServices from "../../Service/GroupServices";
+import { groupServices } from "../../Service/GroupServices";
 export interface ICreateGroup {
   name: string;
 }
 const CreateGroup = () => {
-  const groupService = GroupServices.getInstance();
   const [groupdetails, setGroupdetails] = React.useState<ICreateGroup>({
     name: "",
   });
@@ -51,7 +50,7 @@ const CreateGroup = () => {
 
   const createGroup = () => {
     if (groupdetails.name) {
-      groupService.createGroup({ name: groupdetails.name });
+      groupServices.createGroup({ name: groupdetails.name });
     }
   };
   return (

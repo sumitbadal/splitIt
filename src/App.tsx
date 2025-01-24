@@ -14,6 +14,14 @@ import CreateGroup from "./components/Groups/CreateGroup/CreateGroup";
 import Groups from "./components/Groups/Groups";
 import ErrorPage from "./components/ui-utils/ErrorPage";
 import GroupDetails from "./components/Groups/Details/GroupDetails";
+import LoadingBackdrop from "./components/ui-utils/backdrop/LoadingBackdrop";
+import { useLoading } from "./components/context/LoadingContext";
+import Friends from "./components/Friends/Friends";
+import CreateFriend from "./components/Friends/CreateFriend";
+import Account from "./components/Account/Account";
+import FriendDetails from "./components/Friends/FriendDetails";
+import { useEffect } from "react";
+import Tabs from "./components/Common/Tab/Tabs";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +31,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/splitIt",
         element: <Login />,
       },
       {
@@ -47,34 +59,48 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/friends",
+        element: <Friends />,
+        children: [
+          {
+            path: "/friends/create",
+            element: <CreateFriend />,
+          },
+        ],
+      },
+      {
+        path: "/friend/:friendId",
+        element: <FriendDetails />,
+      },
+      {
+        path: "/Account",
+        element: <Account />,
+      },
     ],
   },
 ]);
 function App() {
+  const { loading } = useLoading();
+
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Body />}>
-    //       {/* Private Routes */}
-    //       <Route
-    //         index
-    //         element={
-    //           <PrivateRoute>
-    //             <Home />
-    //           </PrivateRoute>
-    //         }
-    //       />
+    <>
+      {/* <Tabs defaultActiveTab={2}>
+        <Tabs.TabList>
+          <Tabs.Tab index={0}>Tab 1</Tabs.Tab>
+          <Tabs.Tab index={1}>Tab 2</Tabs.Tab>
+          <Tabs.Tab index={2}>Tab 3</Tabs.Tab>
+        </Tabs.TabList>
 
-    //       {/* Public Routes */}
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/register" element={<Register />} />
-
-    //       {/* Catch-all route for undefined paths */}
-    //       <Route path="*" element={<Navigate to="/" />} />
-    //     </Route>
-    //   </Routes>
-    // </BrowserRouter>
-    <RouterProvider router={router} />
+        <Tabs.TabPanels>
+          <Tabs.TabPanel index={0}>Content for Tab 1</Tabs.TabPanel>
+          <Tabs.TabPanel index={1}>Content for Tab 2</Tabs.TabPanel>
+          <Tabs.TabPanel index={2}>Content for Tab 3</Tabs.TabPanel>
+        </Tabs.TabPanels>
+      </Tabs> */}
+      <LoadingBackdrop open={loading} />
+      <RouterProvider router={router} />
+    </>
   );
 }
 

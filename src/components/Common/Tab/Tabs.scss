@@ -1,0 +1,74 @@
+/* Container for Tabs */
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+}
+
+/* Tab List */
+.tab-list {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #ddd;
+  background-color: #e9ecef;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6c757d;
+  cursor: pointer;
+  border-radius: 0;
+  transition:
+    color 0.3s,
+    background-color 0.3s;
+  background-color: #e9ecef;
+  border-bottom: 2px solid transparent;
+}
+
+/* Active Tab */
+.tab.active {
+  color: #007bff;
+  background-color: #ffffff;
+  border-bottom: 2px solid #007bff;
+  font-weight: 600;
+}
+
+/* Hover Effect */
+.tab:hover {
+  color: #0056b3;
+}
+
+/* Tab Panels */
+.tab-panels {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.tab-panel {
+  font-size: 1rem;
+  color: #212529;
+  line-height: 1.5;
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+  .tab {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .tab-panels {
+    padding: 16px;
+  }
+}

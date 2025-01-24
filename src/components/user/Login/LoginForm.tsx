@@ -18,7 +18,8 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { isAllFieldsValid, messages, validateEmail } from "../UserUtils";
-
+import { useLoading } from "../../context/LoadingContext";
+import { Login } from "manish-service-layer";
 interface LoginProps {
   [key: string]: string;
   emailOrPhone: string;
@@ -30,14 +31,17 @@ interface LoggedInProps {
 }
 
 const LoginForm = (props: LoggedInProps) => {
+  const { showLoading, hideLoading } = useLoading();
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
   const [errors, setErrors] = useState({ emailOrPhone: "", password: "" });
   const [showError, setShowError] = useState("");
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const log = new Login();
   const [touched, setTouched] = useState({
     emailOrPhone: false,
     password: false,
-  }); // Track whether fields are touched
+  });
   const initData = {
     emailOrPhone: "",
     password: "",
@@ -52,7 +56,6 @@ const LoginForm = (props: LoggedInProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    console.log(email);
     if (name && email) {
       navigate("/home");
     }
@@ -105,24 +108,26 @@ const LoginForm = (props: LoggedInProps) => {
   }, [loginDetails, touched]);
 
   const letsLogin = async () => {
+    showLoading();
     if (!allFieldsValid) return;
     if (!isFormValid) return; // Don't submit if the form is invalid
 
     try {
-      const resp = await loginService.login({
+      setLoading(true);
+      const resp = await log.login({
         emailId: loginDetails.emailOrPhone,
         password: loginDetails.password,
       });
 
-      const {
-        data: {
-          details: { fullName, emailId, phone },
-        },
-      } = resp;
+      // const {
+      //   data: {
+      //     details: { fullName, emailId, phone },
+      //   },
+      // } = resp;
 
       dispatch({
         type: "loginDetails",
-        payload: { name: fullName, email: emailId, phone: phone },
+        payload: { name: "fullName", email: "emailId", phone: "phone" },
       });
     } catch (e) {
       if (e?.response?.data?.message) {
@@ -130,6 +135,11 @@ const LoginForm = (props: LoggedInProps) => {
       } else {
         console.log("An error occurred:", e.message || e);
       }
+      if (e.response.status === 401) {
+        navigate("/login");
+      }
+    } finally {
+      hideLoading();
     }
   };
 
@@ -141,15 +151,6 @@ const LoginForm = (props: LoggedInProps) => {
     <div className="current">
       <div className="container-item-head">
         <h2 className="login-heading">Login</h2>
-        {/* <button
-          className="right-item"
-          onClick={(e) => {
-            e.preventDefault();
-            setLoginDetails(initData);
-          }}
-        >
-          <RefreshIcon />
-        </button> */}
       </div>
       <Box component="form" noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
