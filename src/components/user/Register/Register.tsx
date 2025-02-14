@@ -1,16 +1,16 @@
 import { Box } from "@mui/material";
-import { useRef } from "react";
-import "./items.scss";
+import { useEffect, useRef, useState } from "react";
+import "../user.scss";
 
 import RegisterForm from "./ResgisterForm";
 
-const Login = () => {
+const Register = () => {
   const scrollRef = useRef(null);
 
   return (
     <>
       <Box component="form" noValidate sx={{ mt: 0 }} ref={scrollRef}>
-        <div className={"item-container"}>
+        <div className={"container"}>
           <RegisterForm />
         </div>
       </Box>
@@ -18,4 +18,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
